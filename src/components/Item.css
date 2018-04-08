@@ -1,0 +1,78 @@
+.item {
+    position: relative;
+
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+.item label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.item__checkbox {
+    cursor: pointer;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 20px;
+    height: 20px;
+
+    color: transparent;
+    border: none;
+}
+
+.remove-btn:hover+label {
+    position: relative;
+}
+
+.remove-btn:hover+label:after {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+
+    content: '';
+    height: 1px;
+
+    background-color: darkred;
+}
+
+.remove-btn:active+label:after {
+    background-color: red;
+}
+
+.remove-btn::before,
+.remove-btn::after {
+    position: absolute;
+    top: 10px;
+    right: 0;
+
+    content: '';
+    width: 22px;
+    height: 2px;
+
+    background-color: darkred;
+}
+
+.remove-btn::before {
+    transform: rotate(45deg);
+}
+
+.remove-btn::after {
+    transform: rotate(-45deg);
+}
+
+.remove-btn:hover::before,
+.remove-btn:hover::after {
+    background-color: rgba(139, 0, 0, 0.5);
+}
+
+.remove-btn:active::before,
+.remove-btn:active::after {
+    background-color: red;
+}

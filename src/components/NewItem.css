@@ -1,0 +1,41 @@
+.new-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.new-item__input {
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 80%;
+    height: 34px;
+
+    border: 2px solid steelblue;
+    border-radius: 10px;
+
+    font-size: 18px;
+}
+
+.new-item__btn {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    border-radius: 10px;
+    border: 2px solid steelblue;
+    background-color: rgba(70, 130, 180, 0.56);
+}
+
+.new-item__btn:hover {
+    background-color: darkseagreen;
+}
+
+.new-item__btn:active {
+    background-color: seagreen;
+    border-color: seagreen;
+}

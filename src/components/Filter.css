@@ -1,0 +1,14 @@
+.filter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 70%;
+
+    font-size: 16px;
+
+    border: 1px solid steelblue;
+    border-radius: 5px;
+}

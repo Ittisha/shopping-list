@@ -1,28 +1,28 @@
-.App {
-  text-align: center;
+.shopping-list {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 320px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.untaken-all-btn {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    border-radius: 10px;
+    border: 2px solid steelblue;
+    background-color: rgba(70, 130, 180, 0.56);
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.untaken-all-btn:hover {
+    background-color: darkseagreen;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.untaken-all-btn:active {
+    background-color: seagreen;
+    border-color: seagreen;
 }

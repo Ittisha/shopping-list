@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Item from './Item';
 import Filter from './Filter';
 
+import './ItemsList.css';
+
 class ItemsList extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +27,10 @@ class ItemsList extends Component {
                 <h2>
                     {title} ({itemsList.length})
                 </h2>
-                <Filter searchTerm={searchTerm} onChange={this.updateSearchTerm} />
+                <Filter
+                    searchTerm={searchTerm}
+                    onChange={this.updateSearchTerm}
+                />
                 {itemsList
                     .filter(item =>
                         item.value.toLowerCase().includes(searchTerm.toLowerCase()),

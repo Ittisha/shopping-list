@@ -3,6 +3,8 @@ import uniqueId from 'lodash.uniqueid';
 import ItemsList from './ItemsList';
 import NewItem from './NewItem';
 
+import './App.css';
+
 const defaultState = [
     { value: 'Milk', id: uniqueId(), taken: false },
     { value: 'Eggs', id: uniqueId(), taken: false },
@@ -31,9 +33,6 @@ class App extends Component {
     }
 
     addItem(item) {
-        console.log({
-            items: [item, ...this.state.items],
-        });
         this.setState({
             items: [item, ...this.state.items],
         })
@@ -83,7 +82,7 @@ class App extends Component {
                     onRemove={this.removeItem}
                 />
                 <button
-                    className="btn btn--remove"
+                    className="btn untaken-all-btn"
                     onClick={this.markAllUntaken}
                 >
                     Mark All As Untaken

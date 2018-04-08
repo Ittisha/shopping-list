@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import uniqueId from 'lodash.uniqueid';
 
+import './NewItem.css';
+
 class NewItem extends Component {
     constructor(props) {
         super(props);
@@ -38,14 +40,16 @@ class NewItem extends Component {
         const { value } = this.state;
 
         return (
-            <form className="NewItem" onSubmit={this.onFormSubmit}>
+            <form className="new-item" onSubmit={this.onFormSubmit}>
                 <input
-                    className="NewItem-input"
+                    className="new-item__input"
                     type="text"
                     value={value}
                     onChange={this.onInputChange}
                 />
-                <input className="NewItem-submit button" type="submit" />
+                <button className="btn new-item__btn" type="submit">
+                    Add
+                </button>
             </form>
         );
     }

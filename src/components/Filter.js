@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './Filter.css';
+
 class Filter extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +18,7 @@ class Filter extends Component {
         const { searchTerm } = this.props;
         return (
             <input
-            className="search-term"
+            className="filter"
             value={searchTerm}
             onChange={this.onInputChange}
             />
