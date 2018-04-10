@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Item from './Item';
 import Filter from './Filter';
 
@@ -47,5 +48,12 @@ class ItemsList extends Component {
         );
     }
 }
+
+ItemsList.propTypes = {
+    itemsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    title: PropTypes.string.isRequired,
+    onCheckOff: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
+};
 
 export default ItemsList;

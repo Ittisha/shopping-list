@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import uniqueId from 'lodash.uniqueid';
+import PropTypes from 'prop-types';
 
 import './NewItem.css';
 
@@ -54,5 +55,9 @@ class NewItem extends Component {
         );
     }
 }
+
+NewItem.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};
 
 export default NewItem;

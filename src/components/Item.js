@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './Item.css';
 
@@ -27,5 +28,15 @@ class Item extends Component {
         );
     }
 }
+
+Item.propTypes = {
+    item: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        taken: PropTypes.bool.isRequired,
+        value: PropTypes.string.isRequired,
+    }).isRequired,
+    onCheckOff: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
+};
 
 export default Item;
