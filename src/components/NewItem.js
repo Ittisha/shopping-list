@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import uniqueId from 'lodash.uniqueid';
-import PropTypes from 'prop-types';
 
-import './NewItem.css';
+import { addItem } from '../actions';
+
+import './style/NewItem.css';
 
 class NewItem extends Component {
     constructor(props) {
@@ -15,6 +15,10 @@ class NewItem extends Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
+    shouldComponentUpdate(newProps, newState) {
+        return this.state.value !== newState.value;
+    }
+
     onInputChange(evt) {
         const { value } = evt.target;
         this.setState({
@@ -23,16 +27,11 @@ class NewItem extends Component {
     }
 
     onFormSubmit(evt) {
-        const { onSubmit } = this.props;
         const { value } = this.state;
 
         evt.preventDefault();
 
-        onSubmit({
-            value,
-            id: uniqueId(),
-            taken: false,
-        });
+        addItem(value);
 
         this.setState({ value: '' });
     };
@@ -55,9 +54,5 @@ class NewItem extends Component {
         );
     }
 }
-
-NewItem.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-};
 
 export default NewItem;

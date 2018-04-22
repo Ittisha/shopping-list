@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { toggleItem, removeItem } from '../actions';
 
-import './Item.css';
+import './style/Item.css';
 
 class Item extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onItemToggle = this.onItemToggle.bind(this);
+        this.onItemRemove = this.onItemRemove.bind(this);
+    }
+
+    onItemToggle() {
+        toggleItem(this.props.item);
+    }
+
+    onItemRemove() {
+        removeItem(this.props.item);
+    }
+
     render() {
-        const { item, onCheckOff, onRemove } = this.props;
+        const { item } = this.props;
         return(
             <article className="item">
                 <button
                     className="btn remove-btn"
-                    onClick={onRemove}
+                    onClick={this.onItemRemove}
                 >
                     <span className="visually-hidden">Remove</span>
                 </button>
@@ -19,7 +35,7 @@ class Item extends Component {
                         className="item__checkbox"
                         type="checkbox"
                         checked={item.taken}
-                        onChange={onCheckOff}
+                        onChange={this.onItemToggle}
                         id={item.id}
                     />
                     {item.value}
@@ -35,8 +51,6 @@ Item.propTypes = {
         taken: PropTypes.bool.isRequired,
         value: PropTypes.string.isRequired,
     }).isRequired,
-    onCheckOff: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
 };
 
 export default Item;

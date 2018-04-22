@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Item from './Item';
 import Filter from './Filter';
 
-import './ItemsList.css';
+import './style/ItemsList.css';
 
 class ItemsList extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class ItemsList extends Component {
     }
 
     render() {
-        const { title, itemsList, onCheckOff, onRemove } = this.props;
+        const { title, itemsList } = this.props;
         const { searchTerm } = this.state;
 
         return (
@@ -39,8 +39,6 @@ class ItemsList extends Component {
                     .map(item => (
                         <Item
                             key={item.id}
-                            onCheckOff={() => {onCheckOff(item)}}
-                            onRemove={() => { onRemove(item)}}
                             item={item}
                         />
                     ))}
@@ -52,8 +50,6 @@ class ItemsList extends Component {
 ItemsList.propTypes = {
     itemsList: PropTypes.arrayOf(PropTypes.object).isRequired,
     title: PropTypes.string.isRequired,
-    onCheckOff: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
 };
 
 export default ItemsList;
