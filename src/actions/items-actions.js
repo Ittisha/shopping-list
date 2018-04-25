@@ -10,17 +10,14 @@ const addItem = (value) => ({
     },
 });
 
-const removeItem = (item) => ({
+const removeItem = (id) => ({
     type: ItemsActionType.REMOVE_ITEM,
-    item,
+    id: id,
 });
 
-const toggleItem = (item) => ({
+const toggleItem = (id) => ({
     type: ItemsActionType.TOGGLE_ITEM,
-    item: {
-        ...item,
-        taken: !item.taken,
-    },
+    id: id,
 });
 
 const markAllUntaken = () => ({
