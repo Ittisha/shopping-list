@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import ItemsList from './ItemsList';
 import NewItem from './NewItem';
-
-import { markAllUntaken } from '../actions';
-import ItemStore from '../ItemStore';
+import initialState from  './../store/initial-state';
 
 import './style/App.css';
 
@@ -12,22 +10,40 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: ItemStore.getItems(),
+            items: initialState.items,
         };
 
-        this.updateItems = this.updateItems.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.removeItem = this.removeItem.bind(this);
+        this.onItemCheckOff = this.onItemCheckOff.bind(this);
+        this.markAllUntaken = this.markAllUntaken.bind(this);
     }
 
-    updateItems() {
-        this.setState({items: ItemStore.getItems()});
+    addItem(item) {
+        this.setState({
+            items: [item, ...this.state.items],
+        })
     }
 
-    componentDidMount() {
-        ItemStore.on('change', this.updateItems);
+    removeItem(item) {
+        this.setState({
+            items: this.state.items.filter(element => element.id !== item.id),
+        })
     }
 
-    componentWillUnmount() {
-        ItemStore.off('change', this.updateItems);
+    onItemCheckOff(item) {
+        const otherItems = this.state.items.filter(element => element.id !== item.id);
+        const updatedItem = { ...item, taken: !item.taken};
+        this.setState({
+            items: [updatedItem, ...otherItems],
+        });
+    }
+
+    markAllUntaken() {
+        const untakenItems = this.state.items.map(item => ({...item, taken: false}));
+        this.setState({
+            items: untakenItems,
+        })
     }
 
     render() {
@@ -37,18 +53,24 @@ class App extends Component {
 
         return (
             <div className="shopping-list">
-                <NewItem />
+                <NewItem
+                    onSubmit={this.addItem}
+                />
                 <ItemsList
                     title="Items to Buy"
                     itemsList={itemsToBuy}
+                    onCheckOff={this.onItemCheckOff}
+                    onRemove={this.removeItem}
                 />
                 <ItemsList
                     title="Taken Items"
                     itemsList={itemsTaken}
+                    onCheckOff={this.onItemCheckOff}
+                    onRemove={this.removeItem}
                 />
                 <button
                     className="btn untaken-all-btn"
-                    onClick={markAllUntaken}
+                    onClick={this.markAllUntaken}
                 >
                     Mark All As Untaken
                 </button>
