@@ -4,7 +4,6 @@ import { updateUntakenItemsFilter, updateTakenItemsFilter } from '../actions/fil
 import updateNewItemValue from '../actions/new-item-actions';
 
 describe('Item actions', () => {
-
     describe('addItem', () => {
         it('should return ADD_NEW_ITEM as the item type', () => {
             const action = addItem('item name');
@@ -58,6 +57,52 @@ describe('Item actions', () => {
         it('should return MARK_ALL_ITEMS_UNTAKEN as the item type', () => {
             const action = markAllUntaken('item name');
             expect(action.type).toBe(ItemsActionType.MARK_ALL_UNTAKEN);
+        });
+    });
+});
+
+describe('New Item Actions', () => {
+
+    describe('updateNewItemValue', () => {
+        it('should return UPDATE_NEW_ITEM_VALUE as the item type', () => {
+            const action = updateNewItemValue('item name');
+            expect(action.type).toBe(ItemsActionType.UPDATE_NEW_ITEM_VALUE);
+        });
+
+        it('should return the provided text', () => {
+            const value = 'item name';
+            const action = updateNewItemValue(value);
+            expect(action.value).toBe(value);
+        });
+    });
+
+});
+
+describe('Filter Actions', () => {
+
+    describe('updateUntakenItemsFilter', () => {
+        it('should return UPDATE_UNTAKEN_ITEMS_FILTER as the item type', () => {
+            const action = updateUntakenItemsFilter('item name');
+            expect(action.type).toBe(FilterActionType.UPDATE_UNTAKEN_ITEMS_FILTER);
+        });
+
+        it('should return the provided text', () => {
+            const text = 'item name';
+            const action = updateUntakenItemsFilter(text);
+            expect(action.text).toBe(text);
+        });
+    });
+
+    describe('updateTakenItemsFilter', () => {
+        it('should return UPDATE_TAKEN_ITEMS_FILTER as the item type', () => {
+            const action = updateTakenItemsFilter('item name');
+            expect(action.type).toBe(FilterActionType.UPDATE_TAKEN_ITEMS_FILTER);
+        });
+
+        it('should return the provided text', () => {
+            const text = 'item name';
+            const action = updateTakenItemsFilter(text);
+            expect(action.text).toBe(text);
         });
     });
 
