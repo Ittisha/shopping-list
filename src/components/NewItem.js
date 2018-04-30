@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import uniqueId from 'lodash.uniqueid';
 
 import './style/NewItem.css';
 
 class NewItem extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value: '',
-        };
 
         this.onInputChange = this.onInputChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -17,28 +13,18 @@ class NewItem extends Component {
 
     onInputChange(evt) {
         const { value } = evt.target;
-        this.setState({
-            value,
-        })
+        this.props.updateNewItemValue(value);
     }
 
     onFormSubmit(evt) {
-        const { onSubmit } = this.props;
-        const { value } = this.state;
-
         evt.preventDefault();
 
-        onSubmit({
-            value,
-            id: uniqueId(),
-            taken: false,
-        });
-
-        this.setState({ value: '' });
+        const { value } = this.props;
+        this.props.addItem(value);
     };
 
     render() {
-        const { value } = this.state;
+        const { value } = this.props;
 
         return (
             <form className="new-item" onSubmit={this.onFormSubmit}>
@@ -57,7 +43,9 @@ class NewItem extends Component {
 }
 
 NewItem.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    updateNewItemValue: PropTypes.func.isRequired,
+    addItem: PropTypes.func.isRequired,
 };
 
 export default NewItem;

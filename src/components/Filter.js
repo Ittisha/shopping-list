@@ -10,17 +10,17 @@ class Filter extends Component {
     }
 
     onInputChange(evt) {
-        const { onChange } = this.props;
+        const { updateFilter } = this.props;
         const value = evt.target.value;
-        onChange(value);
+        updateFilter(value);
     }
 
     render() {
-        const { searchTerm } = this.props;
+        const { value } = this.props;
         return (
             <input
             className="filter"
-            value={searchTerm}
+            value={value}
             onChange={this.onInputChange}
             />
         )
@@ -28,8 +28,8 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    searchTerm: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    updateFilter: PropTypes.func.isRequired,
 };
 
 export default Filter;
