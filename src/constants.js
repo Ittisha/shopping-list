@@ -24,4 +24,4 @@ const FilterActionType = {
 export {
     ItemsActionType,
     FilterActionType,
-}
+};

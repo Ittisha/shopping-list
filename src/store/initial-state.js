@@ -25,4 +25,4 @@ export default {
     items,
     filter,
     newItemValue: '',
-}
+};

@@ -13,4 +13,4 @@ const updateUntakenItemsFilter = (text) => ({
 export {
     updateTakenItemsFilter,
     updateUntakenItemsFilter,
-}
+};
