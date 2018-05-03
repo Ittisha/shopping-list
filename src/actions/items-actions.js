@@ -1,4 +1,3 @@
-import uniqueId from 'lodash.uniqueid';
 import { ItemsActionType } from "../constants";
 
 const loadItemsDataSuccess = (items) => ({
@@ -23,7 +22,7 @@ const addItem = (value) => ({
     type: ItemsActionType.ADD_ITEM,
     item: {
         value,
-        id: uniqueId(),
+        id: Date.now().toString(),
         taken: false,
     },
 });

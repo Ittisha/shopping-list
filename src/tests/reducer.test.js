@@ -3,7 +3,19 @@ import { updateUntakenItemsFilter, updateTakenItemsFilter } from '../actions/fil
 import updateNewItemValue from '../actions/new-item-actions';
 
 import reducer from '../reducers';
-import initialState from '../store/initial-state';
+
+const initialState = {
+    items: [
+        {value: 'Milk', id: "12", taken: false},
+        {value: 'Eggs', id: "24", taken: false},
+        {value: 'Blueberries', id: "36", taken: false},
+    ],
+    filter: {
+        takenItemsFilter: '',
+        untakenItemsFilter: '',
+    },
+    newItemValue: '',
+};
 
 describe('Combined reducer', () => {
     it('should match the initial state', () => {
