@@ -1,5 +1,8 @@
 import { ItemsActionType, FilterActionType } from '../constants';
-import { addItem, markAllUntaken, removeItem, toggleItem } from '../actions/items-actions';
+import {
+    addItem, loadItemsDataSuccess, markAllUntaken, removeItem,
+    toggleItem
+} from '../actions/items-actions';
 import { updateUntakenItemsFilter, updateTakenItemsFilter } from '../actions/filter-actions';
 import updateNewItemValue from '../actions/new-item-actions';
 
@@ -57,6 +60,26 @@ describe('Item actions', () => {
         it('should return MARK_ALL_ITEMS_UNTAKEN as the item type', () => {
             const action = markAllUntaken('item name');
             expect(action.type).toBe(ItemsActionType.MARK_ALL_UNTAKEN);
+        });
+    });
+
+    describe('loadItemsDataSuccess', () => {
+        it('should return LOAD_ITEMS_DATA_SUCCESS as the type', () => {
+            const items = [
+                {value: 'Milk', id: '1', taken: false},
+                {value: 'Eggs', id: '2', taken: false},
+            ];
+            const action = loadItemsDataSuccess(items);
+            expect(action.type).toBe(ItemsActionType.LOAD_ITEMS_DATA_SUCCESS);
+        });
+
+        it('should return the provided items', () => {
+            const items = [
+                {value: 'Milk', id: '1', taken: false},
+                {value: 'Eggs', id: '2', taken: false},
+            ];
+            const action = loadItemsDataSuccess(items);
+            expect(action.items).toEqual(items);
         });
     });
 });

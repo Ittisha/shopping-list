@@ -1,6 +1,24 @@
 import uniqueId from 'lodash.uniqueid';
 import { ItemsActionType } from "../constants";
 
+const loadItemsDataSuccess = (items) => ({
+    type: ItemsActionType.LOAD_ITEMS_DATA_SUCCESS,
+    items,
+});
+
+const loadItems = (url) => {
+    return (dispatch) => {
+        fetch(url)
+            .then((response) => {
+            if(!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+            .then((items) => dispatch(loadItemsDataSuccess(items)));
+    }
+};
+
 const addItem = (value) => ({
     type: ItemsActionType.ADD_ITEM,
     item: {
@@ -26,6 +44,8 @@ const markAllUntaken = () => ({
 
 
 export {
+    loadItemsDataSuccess,
+    loadItems,
     addItem,
     removeItem,
     toggleItem,

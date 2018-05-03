@@ -1,6 +1,10 @@
 import { ItemsActionType } from '../constants';
 
 const itemsReducer = function (state = [], action) {
+    if(action.type === ItemsActionType.LOAD_ITEMS_DATA_SUCCESS) {
+        return [...action.items];
+    }
+
     if (action.type === ItemsActionType.ADD_ITEM) {
         const item = action.item;
         return [ ...state, item ];
