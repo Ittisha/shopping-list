@@ -1,12 +1,58 @@
+import fetchMock from 'fetch-mock';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { ItemsActionType, FilterActionType } from '../constants';
 import {
-    addItem, loadItemsDataSuccess, markAllUntaken, removeItem,
+    addItem, loadItems, markAllUntaken, removeItem,
     toggleItem
 } from '../actions/items-actions';
 import { updateUntakenItemsFilter, updateTakenItemsFilter } from '../actions/filter-actions';
 import updateNewItemValue from '../actions/new-item-actions';
 
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
 describe('Item actions', () => {
+    describe('loadItems', () => {
+        afterEach(() => {
+            fetchMock.reset();
+            fetchMock.restore();
+        });
+
+        it('fetch items from the database', () => {
+            const itemsInDatabase = {
+                items: [
+                    {
+                        id: '1',
+                        value: 'Apples',
+                        taken: true,
+                    },
+                    {
+                        id: '3',
+                        value: 'Carrots',
+                        taken: false,
+                    }
+                ]
+            };
+
+            fetchMock.getOnce('http://test-thunk.hamsterin.space/anna.json', {
+                body: itemsInDatabase.items,
+                headers: {
+                    'content-type': 'application/json',
+                }
+            });
+
+            const store = mockStore({ items: [] });
+
+            return store.dispatch(loadItems())
+                .then(() => {
+                expect(store.getActions()[0]).toEqual({
+                    type: 'LOAD_ITEMS_DATA_SUCCESS',
+                    items: itemsInDatabase.items,
+                })
+                })
+        })
+    });
     describe('addItem', () => {
         it('should return ADD_NEW_ITEM as the item type', () => {
             const action = addItem('item name');
@@ -60,26 +106,6 @@ describe('Item actions', () => {
         it('should return MARK_ALL_ITEMS_UNTAKEN as the item type', () => {
             const action = markAllUntaken('item name');
             expect(action.type).toBe(ItemsActionType.MARK_ALL_UNTAKEN);
-        });
-    });
-
-    describe('loadItemsDataSuccess', () => {
-        it('should return LOAD_ITEMS_DATA_SUCCESS as the type', () => {
-            const items = [
-                {value: 'Milk', id: '1', taken: false},
-                {value: 'Eggs', id: '2', taken: false},
-            ];
-            const action = loadItemsDataSuccess(items);
-            expect(action.type).toBe(ItemsActionType.LOAD_ITEMS_DATA_SUCCESS);
-        });
-
-        it('should return the provided items', () => {
-            const items = [
-                {value: 'Milk', id: '1', taken: false},
-                {value: 'Eggs', id: '2', taken: false},
-            ];
-            const action = loadItemsDataSuccess(items);
-            expect(action.items).toEqual(items);
         });
     });
 });

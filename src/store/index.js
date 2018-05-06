@@ -15,6 +15,6 @@ const store = createStore(
     composeEnhancers(applyMiddleware(...middleware), ...enchancers)
 );
 
-store.dispatch(loadItems('http://test-thunk.hamsterin.space/anna.json'));
+store.dispatch(loadItems());
 
 export default store;
