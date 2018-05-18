@@ -1,20 +1,13 @@
 import { ItemsActionType } from "../constants";
 
-const loadItems = () => {
-    return (dispatch) => {
-        return fetch('http://test-thunk.hamsterin.space/anna.json')
-            .then((response) => {
-            if(!response.ok) {
-                throw new Error(response.statusText);
-            }
-            return response.json();
-        })
-            .then((items) => dispatch({
-                type: ItemsActionType.LOAD_ITEMS_DATA_SUCCESS,
-                items,
-            }));
-    }
-};
+const fetchItems = () => ({
+    type: ItemsActionType.FETCH_ITEMS,
+});
+
+const updateAllItems = (items) => ({
+    type: ItemsActionType.UPDATE_ALL_ITEMS,
+    items,
+});
 
 const addItem = (value) => ({
     type: ItemsActionType.ADD_ITEM,
@@ -41,7 +34,8 @@ const markAllUntaken = () => ({
 
 
 export {
-    loadItems,
+    fetchItems,
+    updateAllItems,
     addItem,
     removeItem,
     toggleItem,

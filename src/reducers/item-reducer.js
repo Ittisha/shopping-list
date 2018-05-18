@@ -1,7 +1,7 @@
 import { ItemsActionType } from '../constants';
 
 const itemsReducer = function (state = [], action) {
-    if(action.type === ItemsActionType.LOAD_ITEMS_DATA_SUCCESS) {
+    if(action.type === ItemsActionType.UPDATE_ALL_ITEMS) {
         return [...action.items];
     }
 

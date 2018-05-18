@@ -1,4 +1,4 @@
-import { addItem, markAllUntaken, removeItem, toggleItem } from '../actions/items-actions';
+import { addItem, markAllUntaken, removeItem, toggleItem, updateAllItems } from '../actions/items-actions';
 import { updateUntakenItemsFilter, updateTakenItemsFilter } from '../actions/filter-actions';
 import updateNewItemValue from '../actions/new-item-actions';
 
@@ -56,6 +56,12 @@ describe('Combined reducer', () => {
         const areAllUntaken = state.items.every(item => !item.packed);
 
         expect(areAllUntaken).toBe(true);
+    });
+
+    it('updateAllItems', () => {
+       const action = updateAllItems(initialState.items);
+       const state = reducer({}, action);
+       expect(state.items).toEqual(initialState.items);
     });
 
     describe('updateNewItemValue', () => {
